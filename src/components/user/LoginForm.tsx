@@ -11,10 +11,11 @@ import Button from 'react-bootstrap/Button'
 import * as API from 'api/Api'
 import { StatusCode } from "constants/errorConstants"
 import authStore from "stores/auth.store"
+import { observer } from "mobx-react"
 
 const LoginForm: FC = () => {
     const navigate = useNavigate()
-    const { handleSubmit, errors, control, reset } = useLoginForm()
+    const { handleSubmit, errors, control} = useLoginForm()
     const [apiError, setApiError] = useState('')
     const [showError, setShowError] = useState(false)
 
@@ -28,7 +29,7 @@ const LoginForm: FC = () => {
                 setShowError(true)
             } else {
                 authStore.login(response.data)
-                navigate('/')
+                navigate(routes.HOME)
         }
     })
 
@@ -107,4 +108,4 @@ const LoginForm: FC = () => {
     )
 }
 
-export default LoginForm
+export default observer(LoginForm)

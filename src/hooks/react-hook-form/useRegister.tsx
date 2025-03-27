@@ -22,7 +22,7 @@ export const useRegisterForm = () => {
     confirm_password: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords do not match').required('Passwords do not match')
     })
 
-    const {handleSubmit, formState: { errors }, reset, control } = useForm({
+    const {handleSubmit, formState: { errors }, control } = useForm({
     defaultValues: {
         first_name:'',
         last_name:'',
@@ -37,7 +37,6 @@ export const useRegisterForm = () => {
     return {
         handleSubmit,
         errors,
-        reset,
         control
     }
 }

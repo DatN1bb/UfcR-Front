@@ -13,7 +13,7 @@ export const useLoginForm = () => {
     password: Yup.string()
     })
 
-    const {handleSubmit, formState: { errors }, reset, control } = useForm({
+    const {handleSubmit, formState: { errors }, control } = useForm({
     defaultValues: {
     email: '',
     password:'',
@@ -25,7 +25,6 @@ export const useLoginForm = () => {
     return {
         handleSubmit,
         errors,
-        reset,
         control
     }
 }
