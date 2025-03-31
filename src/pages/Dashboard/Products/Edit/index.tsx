@@ -1,7 +1,7 @@
-import CreateUpdateProductForm from "components/product/CreateUpdateProductForm/CreateUpdateProductForm";
-import DashboardLayout from "components/ui/DashboardLayout";
-import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import CreateUpdateProductForm from 'components/product/CreateUpdateProductForm/CreateUpdateProductForm'
+import DashboardLayout from 'components/ui/DashboardLayout'
+import { FC } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const DashboardProductsEdit: FC = () => {
     const location = useLocation()

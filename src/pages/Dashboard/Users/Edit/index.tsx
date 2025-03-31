@@ -1,7 +1,7 @@
-import DashboardLayout from "components/ui/DashboardLayout";
-import CreateUpdateUserForm from "components/user/CreateUpdateUserForm";
-import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import DashboardLayout from 'components/ui/DashboardLayout'
+import CreateUpdateUserForm from 'components/user/CreateUpdateUserForm'
+import { FC } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const DashboardUsersEdit: FC = () => { 
     const location = useLocation()

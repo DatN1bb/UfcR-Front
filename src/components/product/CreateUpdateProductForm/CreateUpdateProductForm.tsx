@@ -1,118 +1,117 @@
-import { CreateUpdateProductFields , useCreateUpdateProductForm } from 'hooks/react-hook-form/useCreateUpdateProduct'
+import { CreateUpdateProductFields, useCreateUpdateProductForm } from 'hooks/react-hook-form/useCreateUpdateProduct'
 import { useState, FC, ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Toast from 'react-bootstrap/Toast'
-import { useNavigate } from "react-router-dom"
-import { Controller } from "react-hook-form"
+import { Form } from 'react-bootstrap'
+import { Controller } from 'react-hook-form'
 import FormLabel from 'react-bootstrap/FormLabel'
-import { Form } from "react-bootstrap"
-import { routes } from "constants/routesConstants"
+import { routes } from 'constants/routesConstants'
 import Button from 'react-bootstrap/Button'
 import * as API from 'api/Api'
-import { StatusCode } from "constants/errorConstants"
+import { StatusCode } from 'constants/errorConstants'
 import { ProductType } from 'models/product'
 
 interface Props {
     defaultValues?: ProductType
 }
+
 const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
     const navigate = useNavigate()
-    const { handleSubmit, errors, control } = useCreateUpdateProductForm({
+    const { handleSubmit, errors, control } = useCreateUpdateProductForm({ 
         defaultValues,
-    })
-    const [apiError, setApiError] = useState('')
-    const [showError, setShowError] = useState(false)
+})
+const [apiError, setApiError] = useState('')
+const [showError, setShowError] = useState(false)
 
-    const [file, SetFile] = useState<File | null>(null)
-    const [fileError, setFileError] = useState(false)
+const [file, setFile] = useState<File | null>(null)
+const [fileError, setFileError] = useState(false)
 
-    const onSubmit = handleSubmit(async(data: CreateUpdateProductFields) => {
-        if (!defaultValues) await handleAdd(data)
-            else await handleUpdate(data)
-    })
+const onSubmit = handleSubmit(async (data: CreateUpdateProductFields) => {
+    if (!defaultValues) await handleAdd(data) 
+        else await handleUpdate(data)
+})
 
     const handleAdd = async (data: CreateUpdateProductFields) => {
-        if(!file) return
-        const response = await API.createProduct(data)
-        if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
-                setApiError(response.data.message)
-                setShowError(true)
+        if (!file) return
+            const response = await API.createProduct(data)
+            if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
+            setApiError(response.data.message)
+            setShowError(true)
             } else if (response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-                setApiError(response.data.message)
-                setShowError(true)
+            setApiError(response.data.message)
+            setShowError(true)
             } else {
-                // Upload product image
-                const formData = new FormData()
-                    formData.append('image', file, file.name)
-                    const fileResponse = await API.uploadProductImage(
-                        formData,
-                        response.data.id
-                    )
-                    if (fileResponse.data?.statusCode === StatusCode.BAD_REQUEST) {
-                        setApiError(fileResponse.data.message)
-                        setShowError(true)
-                    } else if (fileResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-                        setApiError(fileResponse.data.message)
-                        setShowError(true)
-                    } else {
-                        navigate(`${routes.DASHBOARD_PREFIX}/products`)
-                    }
+            // Upload product image
+            const formData = new FormData()
+            formData.append('image', file, file.name)
+            const fileResponse = await API.uploadProductImage(formData, response.data.id) 
+            if (fileResponse.data?.statusCode === StatusCode.BAD_REQUEST) {
+            setApiError(fileResponse.data.message)
+            setShowError(true)
+            } else if (
+            fileResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
+            ) {
+            setApiError(fileResponse.data.message)
+            setShowError(true)
+            } else {
+            navigate(`${routes.DASHBOARD_PREFIX}/products`)
+            }
         }
     }
 
     const handleUpdate = async (data: CreateUpdateProductFields) => {
         const response = await API.updateProduct(data, defaultValues?.id as string)
-        if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
-                setApiError(response.data.message)
-                setShowError(true)
+        if(response.data?.statusCode === StatusCode.BAD_REQUEST) {
+            setApiError(response.data.message)
+            setShowError(true)
             } else if (response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
                 setApiError(response.data.message)
                 setShowError(true)
-            } else {
-                if(!file) {
-                navigate(`${routes.DASHBOARD_PREFIX}/products`)
-                return
+        } else {
+            if (!file) {
+            navigate(`${routes.DASHBOARD_PREFIX}/products`)
+            return
             }
-                // Upload product image
-                const formData = new FormData()
-                    formData.append('avatar', file, file.name)
-                    const fileResponse = await API.uploadProductImage(
-                        formData,
-                        response.data.id
-                    )
-                    if (fileResponse.data?.statusCode === StatusCode.BAD_REQUEST) {
-                        setApiError(fileResponse.data.message)
-                        setShowError(true)
-                    } else if (fileResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-                        setApiError(fileResponse.data.message)
-                        setShowError(true)
-                    } else {
-                        navigate(`${routes.DASHBOARD_PREFIX}/products`)
-                    }
+            // Upload product image
+            const formData = new FormData()
+            formData.append('avatar', file, file.name)
+            const fileResponse = await API.uploadAvatar (formData, response.data.id) 
+            if (fileResponse.data?.statusCode === StatusCode.BAD_REQUEST) {
+                setApiError(fileResponse.data.message)
+                setShowError(true)
+            } else if (
+            fileResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
+            ) {
+            setApiError(fileResponse.data.message)
+            setShowError (true)
+            } else {
+                navigate(`${routes.DASHBOARD_PREFIX}/products`)
+            }
         }
-    } 
+    }
 
     const handleFileError = () => {
-        if(!file) setFileError(true)
+        if (!file) setFileError(true)
             else setFileError(false)
     }
 
     const handleFileChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-        if (target.files) {
-            const myFile = target.files[0]
-            SetFile(myFile)
+        if(target.files) {
+            const myfile = target.files[0]
+            setFile(myfile)
         }
     }
 
     return (
         <>
         <Form className='product-form' onSubmit={onSubmit}>
-                <Controller
+            <Controller
                 control={control}
                 name='title'
                 render={({ field }) => (
                     <Form.Group className='mb-3'>
-                        <FormLabel htmlFor="title">TItle</FormLabel>
+                        <FormLabel htmlFor='title'>Title</FormLabel>
                         <input
                             {...field}
                             type='text'
@@ -123,7 +122,7 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                             }
                         />
                         {errors.title && (
-                            <div className="invalid-feedback text-danger">
+                            <div className='invalid-feedback text-danger'>
                                 {errors.title.message}
                             </div>
                         )}
@@ -135,7 +134,7 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                 name='description'
                 render={({ field }) => (
                     <Form.Group className='mb-3'>
-                        <FormLabel htmlFor="last_name">Description</FormLabel>
+                        <FormLabel htmlFor='description'>Description</FormLabel>
                         <input
                             {...field}
                             type='text'
@@ -146,19 +145,19 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                             }
                         />
                         {errors.description && (
-                            <div className="invalid-feedback text-danger">
+                            <div className='invalid-feedback text-danger'>
                                 {errors.description.message}
                             </div>
                         )}
                     </Form.Group>
                 )}
                 />
-            <Controller
+                <Controller
                 control={control}
                 name='price'
                 render={({ field }) => (
                     <Form.Group className='mb-3'>
-                        <FormLabel htmlFor="price">Price</FormLabel>
+                        <FormLabel htmlFor='price'>Price</FormLabel>
                         <input
                             {...field}
                             type='number'
@@ -169,7 +168,7 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                             }
                         />
                         {errors.price && (
-                            <div className="invalid-feedback text-danger">
+                            <div className='invalid-feedback text-danger'>
                                 {errors.price.message}
                             </div>
                         )}
@@ -185,19 +184,20 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                     type='file'
                     aria-label='Product image'
                     aria-describedby='image'
-                    className={ fileError ? 'form-control is-invalid' : 'form-control'}
+                    className={fileError ? 'form-control is-invalid' : 'form-control'}
                     />
                     {fileError && (
                         <div className='d-block invalid-feedback text-danger mb-2'>
                             Field product image is required
                         </div>
                     )}
-                </Form.Group>
-        <Button className="w-100" 
-        type='submit' 
-        onMouseUp={defaultValues ? undefined : handleFileError}
-        >
-               {defaultValues ? 'Update user' : 'Create new user'} 
+                    </Form.Group> 
+        <Button 
+        className='w-100 mt-4' 
+        type='submit'
+            onMouseUp={defaultValues ? undefined : handleFileError}
+            >
+            {defaultValues ? 'update Product' : 'Create new Product'}     
         </Button>
         </Form>
         {showError && (
@@ -206,7 +206,7 @@ const CreateUpdateProductForm: FC<Props> = ({ defaultValues }) => {
                 <Toast.Header>
                     <strong className='me-suto text-danger'>Error</strong> 
                     </Toast.Header>
-                    <Toast.Body className="text-danger bg-light">{apiError}</Toast.Body>
+                    <Toast.Body className='text-danger bg-light'>{apiError}</Toast.Body>
                 </Toast>
             </ToastContainer>
             )}

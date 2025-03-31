@@ -1,18 +1,18 @@
-import { CreateUpdateRoleFields, useCreateUpdateRoleForm } from "hooks/react-hook-form/useCreateUpdateRole"
-import { useState, FC, useEffect } from "react"
+import { CreateUpdateRoleFields, useCreateUpdateRoleForm } from 'hooks/react-hook-form/useCreateUpdateRole'
+import { useState, FC, useEffect } from 'react'
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Toast from 'react-bootstrap/Toast'
-import { useNavigate } from "react-router-dom"
-import { Controller } from "react-hook-form"
+import { useNavigate } from 'react-router-dom'
+import { Controller } from 'react-hook-form'
 import FormLabel from 'react-bootstrap/FormLabel'
-import { Form } from "react-bootstrap"
-import { routes } from "constants/routesConstants"
+import { Form } from 'react-bootstrap'
+import { routes } from 'constants/routesConstants'
 import Button from 'react-bootstrap/Button'
 import * as API from 'api/Api'
-import { StatusCode } from "constants/errorConstants"
-import { PermissionType, RoleType } from "models/role"
-import { useQuery } from "react-query"
-import { observer } from "mobx-react"
+import { StatusCode } from 'constants/errorConstants'
+import { PermissionType, RoleType } from 'models/role'
+import { useQuery } from 'react-query'
+import { observer } from 'mobx-react'
 
 interface Props {
     defaultValues?: RoleType
@@ -115,7 +115,7 @@ const CreateUpdateRoleForm: FC<Props> = ({ defaultValues }) => {
                 name='name'
                 render={({ field }) => (
                     <Form.Group className='mb-3'>
-                        <FormLabel htmlFor="name">Name</FormLabel>
+                        <FormLabel htmlFor='name'>Name</FormLabel>
                         <input
                             {...field}
                             type='name'
@@ -126,7 +126,7 @@ const CreateUpdateRoleForm: FC<Props> = ({ defaultValues }) => {
                             }
                         />
                         {errors.name && (
-                            <div className="invalid-feedback text-danger">
+                            <div className='invalid-feedback text-danger'>
                                 {errors.name.message}
                             </div>
                         )}
@@ -136,9 +136,9 @@ const CreateUpdateRoleForm: FC<Props> = ({ defaultValues }) => {
                 <FormLabel>Permissions</FormLabel>
                 <div className='d-flex'>
                     {StatePermissions.map((permission: StatePermissions, index: number) => (
-                        <div key={index} className="d-flex me-4">
+                        <div key={index} className='d-flex me-4'>
                             <input
-                            className="me-2"
+                            className='me-2'
                             type='checkbox'
                             {...register('permissions')}
                             value={permission.id}
@@ -148,12 +148,12 @@ const CreateUpdateRoleForm: FC<Props> = ({ defaultValues }) => {
                             </div>
                     ))}
                     {errors.permissions && (
-                        <div className="invalid-feedback text-danger">
+                        <div className='invalid-feedback text-danger'>
                             {errors.permissions.message}
                             </div>
                     )}
                 </div>
-        <Button className="w-100 mt-4" type='submit'>
+        <Button className='w-100 mt-4' type='submit'>
             {defaultValues ? 'update role' : 'Create new role'}     
         </Button>
         </Form>
@@ -163,7 +163,7 @@ const CreateUpdateRoleForm: FC<Props> = ({ defaultValues }) => {
                 <Toast.Header>
                     <strong className='me-suto text-danger'>Error</strong> 
                     </Toast.Header>
-                    <Toast.Body className="text-danger bg-light">{apiError}</Toast.Body>
+                    <Toast.Body className='text-danger bg-light'>{apiError}</Toast.Body>
                 </Toast>
             </ToastContainer>
             )}

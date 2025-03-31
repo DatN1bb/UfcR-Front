@@ -1,13 +1,12 @@
-import DashboardLayout from "components/ui/DashboardLayout";
-import { FC, Fragment, useState } from "react";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import { useQuery } from "react-query";
+import DashboardLayout from 'components/ui/DashboardLayout'
+import { FC, Fragment, useState } from 'react'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+import { useQuery } from 'react-query'
 import * as API from 'api/Api'
-import { Blob } from "buffer";
-import { OrderType } from "models/order";
-import axios from "axios";
-import { apiRoutes } from "constants/apiConstants";
+import { OrderType } from 'models/order'
+import axios from 'axios'
+import { apiRoutes } from 'constants/apiConstants'
 
 const hide = {
     maxHeight: 0,
@@ -23,7 +22,7 @@ const DashboardOrders: FC = () => {
     const [pageNumber, setPageNumber] = useState(1)
 
     const { data, isLoading} = useQuery(
-            ['fetcOrders', pageNumber],
+            ['fetchOrders', pageNumber],
             () => API.fetchorders(pageNumber),
             {
                 keepPreviousData: true,
@@ -40,6 +39,7 @@ const DashboardOrders: FC = () => {
                 `${process.env.REACT_APP_API_URL}${apiRoutes.ORDERS_PREFIX}/export`,
                 {},
                 {
+                    withCredentials: true,
                     responseType: 'blob'
                 }
             )
@@ -52,7 +52,8 @@ const DashboardOrders: FC = () => {
             link.click()
         }
 
-    return <DashboardLayout>
+    return (
+    <DashboardLayout>
         <div className="mb-4">
             <h1 className="mb-4">Orders</h1>
             <Button className='btn btn-dark' onClick={handleExport}>
@@ -142,7 +143,7 @@ const DashboardOrders: FC = () => {
         </>
         )}
     </DashboardLayout>
-        
+    ) 
 }
 
 export default DashboardOrders

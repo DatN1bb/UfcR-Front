@@ -1,9 +1,9 @@
-import { apiRoutes } from "constants/apiConstants";
-import { apiRequest } from "./Api";
-import { LoginUserFields } from "hooks/react-hook-form/useLogin";
-import { UserType } from "models/auth";
-import { RegisterUserFields } from "hooks/react-hook-form/useRegister";
-import { CreateUserFields, UpdateUserFields } from "hooks/react-hook-form/useCreateUpdateUser";
+import { apiRoutes } from 'constants/apiConstants'
+import { apiRequest } from './Api'
+import { LoginUserFields } from 'hooks/react-hook-form/useLogin'
+import { UserType } from 'models/auth'
+import { RegisterUserFields } from 'hooks/react-hook-form/useRegister'
+import { CreateUserFields, UpdateUserFields } from 'hooks/react-hook-form/useCreateUpdateUser'
 
 export const fetchUser = async () => 
     apiRequest<undefined, void>('post', apiRoutes.FETCH_USER)
@@ -45,4 +45,3 @@ export const updateUser = async (data: UpdateUserFields, id: string) =>
 
 export const deleteUser = async (id: string) =>
     apiRequest<string, UserType>('delete', `${apiRoutes.USERS_PREFIX}/${id}`)
-

@@ -1,6 +1,6 @@
-import CreateUpdateProductForm from "components/product/CreateUpdateProductForm/CreateUpdateProductForm";
-import DashboardLayout from "components/ui/DashboardLayout";
-import { FC } from "react";
+import CreateUpdateProductForm from 'components/product/CreateUpdateProductForm/CreateUpdateProductForm'
+import DashboardLayout from 'components/ui/DashboardLayout'
+import { FC } from 'react'
 
 const DashboardProductsAdd: FC = () => {
     return <DashboardLayout> 

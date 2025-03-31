@@ -1,16 +1,16 @@
-import DashboardLayout from "components/ui/DashboardLayout";
-import { FC, useState } from "react";
-import ToastContainer from "react-bootstrap/ToastContainer";
-import Toast from "react-bootstrap/Toast";
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import useMediaQuery from "hooks/useMediaQuery";
-import { useMutation, useQuery } from "react-query";
+import DashboardLayout from 'components/ui/DashboardLayout'
+import { FC, useState } from 'react'
+import ToastContainer from 'react-bootstrap/ToastContainer'
+import Toast from 'react-bootstrap/Toast'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
+import useMediaQuery from 'hooks/useMediaQuery'
+import { useMutation, useQuery } from 'react-query'
 import * as API from 'api/Api'
-import { routes } from "constants/routesConstants";
-import { Link } from "react-router-dom";
-import { RoleType } from "models/role";
-import { StatusCode } from "constants/errorConstants";
+import { routes } from 'constants/routesConstants'
+import { Link } from 'react-router-dom'
+import { RoleType } from 'models/role'
+import { StatusCode } from 'constants/errorConstants'
 
 const DashboardRoles: FC = () => {
     const [apiError, setApiError] = useState('')
