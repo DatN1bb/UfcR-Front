@@ -1,4 +1,4 @@
-# Tutorial
+# MMA Stars
 
 ---
 
@@ -15,7 +15,7 @@
 
 If you want to have a different font, go to: [google fonts](https://fonts.google.com/) and download desired font.
 
-**In this tutorial you will learn how to use:**
+**In this MMA Stars you will learn how to use:**
 
 - react-bootstrap
 - react-hook-form with yup validation
@@ -46,7 +46,7 @@ If you want to have a different font, go to: [google fonts](https://fonts.google
 - [GitHub](https://github.com/)
 - [Trello](https://trello.com/)
 
-[Back To The Top](#Tutorial)
+[Back To The Top](#MMA Stars)
 
 ---
 
@@ -105,7 +105,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 Run both **prettier** and **eslint** with: `npm run format`
 
-[Back To The Top](#Tutorial)
+[Back To The Top](#MMA Stars)
 
 ---
 
@@ -114,11 +114,11 @@ Run both **prettier** and **eslint** with: `npm run format`
 - Website - [@skillupmentor](https://skillupmentor.com/)
 - Github - [@skillupmentor](https://github.com/skillupmentor)
 
-[Back To The Top](#Tutorial)
+[Back To The Top](#MMA Stars)
 
 ## Author Info
 
 - LinkedIn - [@nejcrogelsek](https://www.linkedin.com/in/nejcrogelsek/)
 - Github - [@nejcrogelsek](https://github.com/nejcrogelsek)
 
-[Back To The Top](#Tutorial)
+[Back To The Top](#MMA Stars)

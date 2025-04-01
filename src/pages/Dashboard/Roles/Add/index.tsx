@@ -4,11 +4,13 @@ import { FC } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const DashboardRolesAdd: FC = () => {
-    const location = useLocation()
-    return <DashboardLayout>
-        <h1 className="mb-4 text-center">Create new role</h1>
-        <CreateUpdateRoleForm defaultValues={location.state} />
+  const location = useLocation()
+  return (
+    <DashboardLayout>
+      <h1 className="mb-4 text-center">Create new role</h1>
+      <CreateUpdateRoleForm defaultValues={location.state} />
     </DashboardLayout>
+  )
 }
 
 export default DashboardRolesAdd

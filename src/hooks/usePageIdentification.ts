@@ -2,23 +2,23 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const onDefault = () => {
-  document.title = 'Tutorial'
+  document.title = 'MMA Stars'
   document.body.id = ''
 }
 const onHome = () => {
-  document.title = 'Tutorial'
+  document.title = 'MMA Stars'
   document.body.id = 'home-page'
 }
 const onDashboard = () => {
-  document.title = 'Tutorial - Dashboard'
+  document.title = 'MMA Stars - Dashboard'
   document.body.id = 'dashboard-page'
 }
 const onLogin = () => {
-  document.title = 'Tutorial - Login'
+  document.title = 'MMA Stars - Login'
   document.body.id = 'login-page'
 }
 const onSignup = () => {
-  document.title = 'Tutorial - Signup'
+  document.title = 'MMA Stars - Signup'
   document.body.id = 'signup-page'
 }
 

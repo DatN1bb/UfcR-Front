@@ -10,7 +10,14 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <>
       <Navbar />
-      <div className="layout-container container-xxl p-4">{children}</div>
+      <div
+        className="layout-container container-xxl p-4"
+        style={{
+          backgroundColor: '#FFFFFF',
+        }}
+      >
+        {children}
+      </div>
       <Footer />
     </>
   )

@@ -3,11 +3,12 @@ import DashboardLayout from 'components/ui/DashboardLayout'
 import { FC } from 'react'
 
 const DashboardProductsAdd: FC = () => {
-    return <DashboardLayout> 
-        <h1 className="mb-4 text-center">Create new </h1>
-        <CreateUpdateProductForm />
-        </DashboardLayout>
-    
+  return (
+    <DashboardLayout>
+      <h1 className="mb-4 text-center">Create new </h1>
+      <CreateUpdateProductForm />
+    </DashboardLayout>
+  )
 }
 
 export default DashboardProductsAdd
