@@ -177,45 +177,22 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
         </Form.Group>
         <Controller
           control={control}
-          name="first_name"
+          name="username"
           render={({ field }) => (
             <Form.Group className="mb-3">
-              <FormLabel htmlFor="first_name">First Name</FormLabel>
+              <FormLabel htmlFor="username">Username</FormLabel>
               <input
                 {...field}
                 type="text"
-                aria-label="First name"
-                aria-describedby="first_name"
+                aria-label="username"
+                aria-describedby="username"
                 className={
-                  errors.first_name ? 'form-control is-invalid' : 'form-control'
+                  errors.username ? 'form-control is-invalid' : 'form-control'
                 }
               />
-              {errors.first_name && (
+              {errors.username && (
                 <div className="invalid-feedback text-danger">
-                  {errors.first_name.message}
-                </div>
-              )}
-            </Form.Group>
-          )}
-        />
-        <Controller
-          control={control}
-          name="last_name"
-          render={({ field }) => (
-            <Form.Group className="mb-3">
-              <FormLabel htmlFor="last_name">Last Name</FormLabel>
-              <input
-                {...field}
-                type="text"
-                aria-label="Last name"
-                aria-describedby="last_name"
-                className={
-                  errors.last_name ? 'form-control is-invalid' : 'form-control'
-                }
-              />
-              {errors.last_name && (
-                <div className="invalid-feedback text-danger">
-                  {errors.last_name.message}
+                  {errors.username.message}
                 </div>
               )}
             </Form.Group>
@@ -230,7 +207,6 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
               <input
                 {...field}
                 type="email"
-                placeholder="example@gmail.com"
                 aria-label="Email"
                 aria-describedby="email"
                 className={

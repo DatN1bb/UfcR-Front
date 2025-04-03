@@ -4,16 +4,14 @@ import * as Yup from 'yup'
 import { UserType } from 'models/auth'
 
 export interface CreateUserFields {
-  first_name: string
-  last_name: string
+  username: string
   email: string
   password: string
   confirm_password: string
 }
 
 export interface UpdateUserFields {
-  first_name: string
-  last_name: string
+  username: string
   email: string
   password: string
   confirm_password: string
@@ -26,8 +24,7 @@ interface Props {
 
 export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
   const CreateUserSchema = Yup.object().shape({
-    first_name: Yup.string().notRequired(),
-    last_name: Yup.string().notRequired(),
+    username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string()
       .matches(
@@ -42,8 +39,7 @@ export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
   })
 
   const UpdateUserSchema = Yup.object().shape({
-    first_name: Yup.string().notRequired(),
-    last_name: Yup.string().notRequired(),
+    username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string().notRequired(),
     confirm_password: Yup.string()
@@ -58,8 +54,7 @@ export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
     control,
   } = useForm({
     defaultValues: {
-      first_name: '',
-      last_name: '',
+      username: '',
       email: '',
       password: '',
       confirm_password: '',

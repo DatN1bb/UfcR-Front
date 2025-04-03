@@ -84,8 +84,8 @@ const DashboardUsers: FC = () => {
                     <tr key={index}>
                       <td>{item.email}</td>
                       <td>
-                        {item.first_name || item.last_name
-                          ? `${item.first_name ?? ''} ${item.last_name ?? ''}`
+                        {item.username
+                          ? `${item.username ?? ''}`
                           : '/'}
                       </td>
                       <td>{item.role?.name ?? '/'}</td>
@@ -99,8 +99,7 @@ const DashboardUsers: FC = () => {
                           to={`${routes.DASHBOARD_PREFIX}/users/edit`}
                           state={{
                             id: item.id,
-                            first_name: item.first_name,
-                            last_name: item.last_name,
+                            username: item.username,
                             email: item.email,
                             role_id: item.role?.id,
                             avatar: item.avatar,

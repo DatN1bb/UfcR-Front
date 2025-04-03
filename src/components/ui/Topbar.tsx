@@ -41,8 +41,7 @@ const Topbar: FC = () => {
               to={`${routes.DASHBOARD_PREFIX}/users/edit`}
               state={{
                 id: authStore.user?.id,
-                first_name: authStore.user?.first_name,
-                last_name: authStore.user?.last_name,
+                username: authStore.user?.username,
                 email: authStore.user?.email,
                 role_id: authStore.user?.role?.id,
                 avatar: authStore.user?.avatar,
@@ -70,8 +69,7 @@ const Topbar: FC = () => {
               to={`${routes.DASHBOARD_PREFIX}/users/edit`}
               state={{
                 id: authStore.user?.id,
-                first_name: authStore.user?.first_name,
-                last_name: authStore.user?.last_name,
+                username: authStore.user?.username,
                 email: authStore.user?.email,
                 role_id: authStore.user?.role?.id,
                 avatar: authStore.user?.avatar,
@@ -83,8 +81,8 @@ const Topbar: FC = () => {
                 round
                 src={`${process.env.REACT_APP_API_URL}/files/${authStore.user?.avatar}`}
                 alt={
-                  authStore.user?.first_name || authStore.user?.last_name
-                    ? `${authStore.user?.first_name} ${authStore.user?.last_name}`
+                  authStore.user?.username
+                    ? `${authStore.user?.username}`
                     : authStore.user?.email
                 }
               />
