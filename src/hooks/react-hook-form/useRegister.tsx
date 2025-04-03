@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 
-export interface RegisterUserFields {
+export interface RegisterUporabnikFields {
   username: string
   email: string
   password: string

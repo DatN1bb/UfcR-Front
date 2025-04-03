@@ -61,7 +61,7 @@ const Navbar: FC = () => {
             >
               <ul className="navbar-nav mb-2 mb-lg-0">
                 
-                {authStore.user ? (
+                {authStore.Uporabnik? (
                   <li className="nav-item pe-4">
                     <Button className="btn btn-dark" onClick={signout} color='red'>
                       Signout

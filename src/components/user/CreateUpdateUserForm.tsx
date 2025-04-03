@@ -1,7 +1,7 @@
 import {
-  CreateUserFields,
-  UpdateUserFields,
-  useCreateUpdateUserForm,
+  CreateUporabnikFields,
+  UpdateUporabnikFields,
+  useCreateUpdateUporabnikForm,
 } from 'hooks/react-hook-form/useCreateUpdateUser'
 import { useState, FC, ChangeEvent, useEffect } from 'react'
 import ToastContainer from 'react-bootstrap/ToastContainer'
@@ -17,17 +17,17 @@ import { StatusCode } from 'constants/errorConstants'
 import authStore from 'stores/auth.store'
 import Avatar from 'react-avatar'
 import { observer } from 'mobx-react'
-import { UserType } from 'models/auth'
+import { UporabnikType } from 'models/auth'
 import { useQuery } from 'react-query'
 import { RoleType } from 'models/role'
 
 interface Props {
-  defaultValues?: UserType & { isActiveUser?: boolean }
+  defaultValues?: UporabnikType & { isActiveUporabnik?: boolean }
 }
 
-const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
+const CreateUpdateUporabnikForm: FC<Props> = ({ defaultValues }) => {
   const navigate = useNavigate()
-  const { handleSubmit, errors, control } = useCreateUpdateUserForm({
+  const { handleSubmit, errors, control } = useCreateUpdateUporabnikForm({
     defaultValues,
   })
   const { data: rolesData } = useQuery(['roles'], API.fetchRoles)
@@ -39,13 +39,13 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
   const [fileError, setFileError] = useState(false)
 
   const onSubmit = handleSubmit(
-    async (data: CreateUserFields | UpdateUserFields) => {
-      if (!defaultValues) await handleAdd(data as UpdateUserFields)
-      else await handleUpdate(data as UpdateUserFields)
+    async (data: CreateUporabnikFields | UpdateUporabnikFields) => {
+      if (!defaultValues) await handleAdd(data as UpdateUporabnikFields)
+      else await handleUpdate(data as UpdateUporabnikFields)
     },
   )
 
-  const handleAdd = async (data: CreateUserFields) => {
+  const handleAdd = async (data: CreateUporabnikFields) => {
     if (!file) return
     const response = await API.login(data)
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
@@ -68,13 +68,13 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
         setApiError(fileResponse.data.message)
         setShowError(true)
       } else {
-        navigate(`${routes.DASHBOARD_PREFIX}/users`)
+        navigate(`${routes.DASHBOARD_PREFIX}/uporabniki`)
       }
     }
   }
 
-  const handleUpdate = async (data: UpdateUserFields) => {
-    const response = await API.updateUser(data, defaultValues?.id as string)
+  const handleUpdate = async (data: UpdateUporabnikFields) => {
+    const response = await API.updateUporabnik(data, defaultValues?.id as string)
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
       setApiError(response.data.message)
       setShowError(true)
@@ -83,10 +83,10 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
       setShowError(true)
     } else {
       if (!file) {
-        if (defaultValues?.isActiveUser) {
+        if (defaultValues?.isActiveUporabnik) {
           authStore.login(response.data)
         }
-        navigate(`${routes.DASHBOARD_PREFIX}/users`)
+        navigate(`${routes.DASHBOARD_PREFIX}/uporabniki`)
         return
       }
       // Upload avatar
@@ -102,19 +102,19 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
         setApiError(fileResponse.data.message)
         setShowError(true)
       } else {
-        if (defaultValues?.isActiveUser) {
-          // Get user with avatar image
-          const userResponse = await API.fetchUser()
+        if (defaultValues?.isActiveUporabnik) {
+          // Get uporabnik with avatar image
+          const uporabnikResponse = await API.fetchUporabniki()
           if (
-            userResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
+            uporabnikResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
           ) {
-            setApiError(userResponse.data.message)
+            setApiError(uporabnikResponse.data.message)
             setShowError(true)
           } else {
-            authStore.login(userResponse.data)
+            authStore.login(uporabnikResponse.data)
           }
         }
-        navigate(`${routes.DASHBOARD_PREFIX}/users`)
+        navigate(`${routes.DASHBOARD_PREFIX}/uporabniki`)
       }
     }
   }
@@ -146,7 +146,7 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
 
   return (
     <>
-      <Form className="user-form" onSubmit={onSubmit}>
+      <Form className="uporabnik-form" onSubmit={onSubmit}>
         <Form.Group className="d-flex flex-column justify-content-center align-items-center">
           <FormLabel htmlFor="avatar" id="avatar-p">
             <Avatar
@@ -280,7 +280,7 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
           type="submit"
           onMouseUp={defaultValues ? undefined : handleFileError}
         >
-          {defaultValues ? 'Update user' : 'Create new user'}
+          {defaultValues ? 'Update uporabnik' : 'Create new uporabnik'}
         </Button>
       </Form>
       {showError && (
@@ -297,4 +297,4 @@ const CreateUpdateUserForm: FC<Props> = ({ defaultValues }) => {
   )
 }
 
-export default observer(CreateUpdateUserForm)
+export default observer(CreateUpdateUporabnikForm)

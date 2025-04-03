@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
-import { UserType } from 'models/auth'
+import { UporabnikType } from 'models/auth'
 
-export interface CreateUserFields {
+export interface CreateUporabnikFields {
   username: string
   email: string
   password: string
   confirm_password: string
 }
 
-export interface UpdateUserFields {
+export interface UpdateUporabnikFields {
   username: string
   email: string
   password: string
@@ -19,11 +19,11 @@ export interface UpdateUserFields {
 }
 
 interface Props {
-  defaultValues?: UserType
+  defaultValues?: UporabnikType
 }
 
-export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
-  const CreateUserSchema = Yup.object().shape({
+export const useCreateUpdateUporabnikForm = ({ defaultValues }: Props) => {
+  const CreateUporabnikSchema = Yup.object().shape({
     username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string()
@@ -38,7 +38,7 @@ export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
     role_id: Yup.string().required('Role field is required'),
   })
 
-  const UpdateUserSchema = Yup.object().shape({
+  const UpdateUporabnikSchema = Yup.object().shape({
     username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string().notRequired(),
@@ -63,8 +63,8 @@ export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
     },
     mode: 'onSubmit',
     resolver: defaultValues
-      ? yupResolver(UpdateUserSchema)
-      : yupResolver(CreateUserSchema),
+      ? yupResolver(UpdateUporabnikSchema)
+      : yupResolver(CreateUporabnikSchema),
   })
 
   return {
@@ -74,4 +74,4 @@ export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
   }
 }
 
-export type CreateUpdateRoleFields = ReturnType<typeof useCreateUpdateUserForm>
+export type CreateUpdateRoleFields = ReturnType<typeof useCreateUpdateUporabnikForm>

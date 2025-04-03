@@ -10,25 +10,25 @@ import * as API from 'api/Api'
 import { routes } from 'constants/routesConstants'
 import { Link } from 'react-router-dom'
 import { StatusCode } from 'constants/errorConstants'
-import { UserType } from 'models/auth'
+import { UporabnikType } from 'models/auth'
 import authStore from 'stores/auth.store'
 
-const DashboardUsers: FC = () => {
+const DashboardUporabniki: FC = () => {
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
   const { isMobile } = useMediaQuery(768)
   const [pageNumber, setPageNumber] = useState(1)
 
   const { data, isLoading, refetch } = useQuery(
-    ['fetchUsers', pageNumber],
-    () => API.fetchUsers(pageNumber),
+    ['fetchUporabniki', pageNumber],
+    () => API.fetchUporabniki(),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
     },
   )
 
-  const { mutate } = useMutation((id: string) => API.deleteUser(id), {
+  const { mutate } = useMutation((id: string) => API.deleteUporabnik(id), {
     onSuccess: (response) => {
       if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
         setApiError(response.data.message)
@@ -43,7 +43,7 @@ const DashboardUsers: FC = () => {
       }
     },
     onError: () => {
-      setApiError('Something went wrong while deleting a user.')
+      setApiError('Something went wrong while deleting a uporabnik.')
       setShowError(true)
     },
   })
@@ -80,7 +80,7 @@ const DashboardUsers: FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data.data.map((item: UserType, index: number) => (
+                  {data?.data.data.map((item: UporabnikType, index: number) => (
                     <tr key={index}>
                       <td>{item.email}</td>
                       <td>
@@ -104,7 +104,7 @@ const DashboardUsers: FC = () => {
                             role_id: item.role?.id,
                             avatar: item.avatar,
                             isActiveUser:
-                              authStore.user?.email === item.email
+                              authStore.uporabnik?.email === item.email
                                 ? true
                                 : false,
                           }}
@@ -160,4 +160,4 @@ const DashboardUsers: FC = () => {
   )
 }
 
-export default DashboardUsers
+export default DashboardUporabniki

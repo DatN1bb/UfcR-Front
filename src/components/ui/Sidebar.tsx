@@ -22,18 +22,6 @@ const SidebarItems: ISidebarItem[] = [
     title: 'Users',
     href: `${routes.DASHBOARD_PREFIX}/users`,
   },
-  {
-    title: 'Roles',
-    href: `${routes.DASHBOARD_PREFIX}/roles`,
-  },
-  {
-    title: 'Products',
-    href: `${routes.DASHBOARD_PREFIX}/products`,
-  },
-  {
-    title: 'Orders',
-    href: `${routes.DASHBOARD_PREFIX}/orders`,
-  },
 ]
 
 const Item: FC<ItemProps> = ({ href, setOpen, title }) => {
