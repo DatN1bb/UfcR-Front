@@ -1,20 +1,20 @@
-import { UporabnikType } from 'models/auth'
+import { UserType } from 'models/auth'
 
-const uporabnik_prefix = 'uporabnik'
+const User_prefix = 'User'
 
-const uporabnikStorage = {
-  getUporabnik: (): UporabnikType => {
-    if (typeof window === 'undefined') return {} as UporabnikType
+const UserStorage = {
+  getUser: (): UserType => {
+    if (typeof window === 'undefined') return {} as UserType
     return JSON.parse(
-      window.localStorage.getItem(`${uporabnik_prefix}`) as string,
-    ) as UporabnikType
+      window.localStorage.getItem(`${User_prefix}`) as string,
+    ) as UserType
   },
-  setUporabnik: (uporabnik: UporabnikType): void => {
-    window.localStorage.setItem(`${uporabnik_prefix}`, JSON.stringify(uporabnik))
+  setUser: (User: UserType): void => {
+    window.localStorage.setItem(`${User_prefix}`, JSON.stringify(User))
   },
-  clearUporabnik: (): void => {
-    window.localStorage.removeItem(`${uporabnik_prefix}`)
+  clearUser: (): void => {
+    window.localStorage.removeItem(`${User_prefix}`)
   },
 }
 
-export { uporabnikStorage }
+export { UserStorage }

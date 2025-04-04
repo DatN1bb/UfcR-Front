@@ -1,5 +1,5 @@
 import {
-  RegisterUporabnikFields,
+  RegisterUserFields,
   useRegisterForm,
 } from 'hooks/react-hook-form/useRegister'
 import { useState, FC, ChangeEvent, useEffect } from 'react'
@@ -27,7 +27,7 @@ const RegisterForm: FC = () => {
   const [preview, setPreview] = useState<string | null>(null)
   const [fileError, setFileError] = useState(false)
 
-  const onSubmit = handleSubmit(async (data: RegisterUporabnikFields) => {
+  const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
     if (!file) return
     const response = await API.login(data)
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
@@ -37,7 +37,7 @@ const RegisterForm: FC = () => {
       setApiError(response.data.message)
       setShowError(true)
     } else {
-      //Login uporabnik before uploading an avatar image
+      //Login userbefore uploading an avatar image
       const loginResponse = await API.login({
         email: data.email,
         password: data.password,
@@ -67,15 +67,15 @@ const RegisterForm: FC = () => {
           setApiError(fileResponse.data.message)
           setShowError(true)
         } else {
-          // Get uporabnik with avatar image
-          const uporabnikResponse = await API.fetchUporabniki()
+          // Get userwith avatar image
+          const UserResponse = await API.fetchUsers()
           if (
-            uporabnikResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
+            UserResponse.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
           ) {
             setApiError(fileResponse.data.message)
             setShowError(true)
           } else {
-            authStore.login(uporabnikResponse.data)
+            authStore.login(UserResponse.data)
             navigate('/')
           }
         }

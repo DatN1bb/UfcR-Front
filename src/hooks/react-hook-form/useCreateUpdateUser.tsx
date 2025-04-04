@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
-import { UporabnikType } from 'models/auth'
+import { UserType } from 'models/auth'
 
-export interface CreateUporabnikFields {
+export interface CreateUserFields {
   username: string
   email: string
   password: string
   confirm_password: string
 }
 
-export interface UpdateUporabnikFields {
+export interface UpdateUserFields {
   username: string
   email: string
   password: string
@@ -19,11 +19,11 @@ export interface UpdateUporabnikFields {
 }
 
 interface Props {
-  defaultValues?: UporabnikType
+  defaultValues?: UserType
 }
 
-export const useCreateUpdateUporabnikForm = ({ defaultValues }: Props) => {
-  const CreateUporabnikSchema = Yup.object().shape({
+export const useCreateUpdateUserForm = ({ defaultValues }: Props) => {
+  const CreateUserSchema = Yup.object().shape({
     username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string()
@@ -38,7 +38,7 @@ export const useCreateUpdateUporabnikForm = ({ defaultValues }: Props) => {
     role_id: Yup.string().required('Role field is required'),
   })
 
-  const UpdateUporabnikSchema = Yup.object().shape({
+  const UpdateUserSchema = Yup.object().shape({
     username: Yup.string().notRequired(),
     email: Yup.string().email().required('Please enter a valid email'),
     password: Yup.string().notRequired(),
@@ -63,8 +63,8 @@ export const useCreateUpdateUporabnikForm = ({ defaultValues }: Props) => {
     },
     mode: 'onSubmit',
     resolver: defaultValues
-      ? yupResolver(UpdateUporabnikSchema)
-      : yupResolver(CreateUporabnikSchema),
+      ? yupResolver(UpdateUserSchema)
+      : yupResolver(CreateUserSchema),
   })
 
   return {
@@ -74,4 +74,4 @@ export const useCreateUpdateUporabnikForm = ({ defaultValues }: Props) => {
   }
 }
 
-export type CreateUpdateRoleFields = ReturnType<typeof useCreateUpdateUporabnikForm>
+export type CreateUpdateRoleFields = ReturnType<typeof useCreateUpdateUserForm>

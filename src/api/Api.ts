@@ -28,7 +28,7 @@ export * from './User'
 export * from './Role'
 export * from './Product'
 export * from './Order'
-export function fetchUporabnik() {
+export function fetchUser() {
   throw new Error('Function not implemented.')
 }
 

@@ -1,4 +1,4 @@
-import { LoginUporabnikFields, useLoginForm } from 'hooks/react-hook-form/useLogin'
+import { LoginUserFields, useLoginForm } from 'hooks/react-hook-form/useLogin'
 import { useState, FC } from 'react'
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Toast from 'react-bootstrap/Toast'
@@ -19,7 +19,7 @@ const LoginForm: FC = () => {
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
 
-  const onSubmit = handleSubmit(async (data: LoginUporabnikFields) => {
+  const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
       setApiError(response.data.message)
